@@ -1,2 +1,0 @@
-# Trading-Journal
-FREELANCE
