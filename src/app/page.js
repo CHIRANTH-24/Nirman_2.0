@@ -12,6 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 export default function Home() {
     const { setTheme } = useTheme();
@@ -37,6 +38,11 @@ export default function Home() {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      <Link href="dashboard/create">
+      <Button>
+        Get Started
+      </Button>
+      </Link>
     </div>
   );
 }
