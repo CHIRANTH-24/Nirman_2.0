@@ -18,9 +18,8 @@ const GovermentView = () => {
   const { user } = useUser();
   const [formData, setFormData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const tenderId = uuidv4();
-  const router = useRouter();
-  const createdBy = user?.fullName || "unknown";
+  const projectId = uuidv4();
+
 
   const handleUserInput = (fieldName, fieldValue) => {
     setFormData((prev) => ({ ...prev, [fieldName]: fieldValue }));
@@ -33,13 +32,12 @@ const GovermentView = () => {
   const submitTender = async () => {
     setIsLoading(true);
     try {
-      const result = await axios.post("/api/submit-tender", {
-        tenderId: tenderId,
+      const result = await axios.post("/api/generate-bid", {
+        projectId: projectId,
         ...formData,
       });
 
       console.log("API response:", result.data.message);
-      router.push("/dashboard/tenders");
       toast.success("Tender submitted successfully!");
     } catch (error) {
       console.error("Error submitting tender:", error);
@@ -70,20 +68,20 @@ const GovermentView = () => {
                 <Label htmlFor="projectName">Project Name</Label>
                 <Input
                   type="text"
-                  id="projectName"
+                  id="name"
                   placeholder="Enter the project name"
-                  onChange={(e) => handleUserInput("projectName", e.target.value)}
+                  onChange={(e) => handleUserInput("name", e.target.value)}
                 />
               </div>
 
               {/* Project Details */}
               <div className="space-y-2">
-                <Label htmlFor="projectDetails">Project Details</Label>
+                <Label htmlFor="details">Project Details</Label>
                 <Textarea
-                  id="projectDetails"
+                  id="details"
                   placeholder="Enter the project details"
                   rows={4}
-                  onChange={(e) => handleUserInput("projectDetails", e.target.value)}
+                  onChange={(e) => handleUserInput("details", e.target.value)}
                 />
               </div>
 
@@ -104,7 +102,7 @@ const GovermentView = () => {
                   type="text"
                   id="projectLocation"
                   placeholder="Enter the project location"
-                  onChange={(e) => handleUserInput("projectLocation", e.target.value)}
+                  onChange={(e) => handleUserInput("location", e.target.value)}
                 />
               </div>
 
@@ -124,9 +122,9 @@ const GovermentView = () => {
                 <Label htmlFor="bidAmount">Bid Amount (₹)</Label>
                 <Input
                   type="number"
-                  id="bidAmount"
+                  id="minBid"
                   placeholder="Enter your bid amount"
-                  onChange={(e) => handleUserInput("bidAmount", e.target.value)}
+                  onChange={(e) => handleUserInput("minBid", e.target.value)}
                 />
               </div>
             </div>
