@@ -52,6 +52,12 @@ const GovermentView = () => {
     <div>
       
       <div className="container mx-auto px-4 py-8">
+        <div className="border rounded-lg bg-gray-100 dark:bg-gray-800 p-6">
+          <h2 className="text-lg font-bold">Government Dashboard</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            Welcome to the government view. Here you can manage projects and track bids from construction companies.
+          </p>
+        </div>
         <Card className="w-full max-w-2xl mx-auto">
           <CardHeader>
             <CardTitle className="text-2xl font-bold text-center">Submit Your Tender</CardTitle>
