@@ -8,8 +8,8 @@ export async function POST(req) {
     await req.json();
 
   const PROMPT =
-    "Generate a Bid draft with The government project" +
-    name + "and" +
+    "Generate a Bid draft for The government project" +
+    name + "and with details of " +
     details +
     "The project is located" +
     location +
@@ -19,7 +19,7 @@ export async function POST(req) {
     minBid +
     ". The project is expected to be completed by " +
     deadline +
-    ". \n\nIn json format covering these \n1. Project Overview\n- Project Name\n- Location\n- Deadline/Completion Date\n- Scope of Work\n\n 2. Cost Breakdown\n- Materials\n- Labor Costs\n- Equipment and Machinery\n- Miscellaneous Costs\n- Profit Margin\n\n 3. Project Duration & Timeline\n- Estimated Duration\n- Detailed Schedule\n\n 4. Compliance and Certifications\n- Regulatory Compliance\n-  Warranties\n\n 5. Risk Analysis & Management\n- Risk Assessment\n- Risk Mitigation Plans\n- Contingency Plans\n\n 7. Cost Analysis\n- Unit Price Analysis\n- Historical Cost Comparison\n- Escalation and Inflation\n\n 8. Time and Resource Allocation Analysis\n- Workforce Efficiency\n- Project Schedule Feasibility\n\n 10. Risk Assessment\n- Contingency Planning\n- Subcontractor Risks\n\n 11. Profitability and Competitive Analysis\n- Break-even Analysis\n- Competitor Comparison\n\n 12. Quality Control & Safety Analysis\n- Safety Plan\n- Quality Assurance\n\n 13. General Information\n- Total Bid Price\n- Payment Terms\n- Warranty Information\n";
+    ". \n\nIn json format covering these \n1. Project Overview\n- Project Name\n- Location\n- Deadline/Completion Date\n- Scope of Work\n\n 2. Cost Breakdown\n- Materials\n- Labor Costs\n- Equipment and Machinery\n- Miscellaneous Costs\n- Profit Margin\n\n 3. Project Duration & Timeline\n- Estimated Duration\n- Detailed Schedule\n\n 4. Compliance and Certifications\n- Regulatory Compliance\n-  Warranties\n\n 5. Risk Analysis & Management\n- Risk Assessment\n- Risk Mitigation Plans\n- Contingency Plans\n\n 7. Cost Analysis\n-Best Bid Price for this project such that chances of getting the project from the government is more \n- Unit Price Analysis\n- Historical Cost Comparison\n- Escalation and Inflation\n\n 8. Time and Resource Allocation Analysis\n- Workforce Efficiency\n- Project Schedule Feasibility\n\n 10. Risk Assessment\n- Contingency Planning\n- Subcontractor Risks\n\n 11. Profitability and Competitive Analysis\n- Break-even Analysis\n- Competitor Comparison\n\n 12. Quality Control & Safety Analysis\n- Safety Plan\n- Quality Assurance\n\n 13. General Information\n- Total Bid Price\n- Payment Terms\n- Warranty Information\n";
   //Generate
   const aiResp = await projectOutline.sendMessage(PROMPT);
   const aiResult = JSON.parse(aiResp.response.text());

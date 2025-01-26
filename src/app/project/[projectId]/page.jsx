@@ -34,11 +34,11 @@ function RecipePage() {
 
   return (
     <div className='min-h-screen bg-gray-100'>
-      { project?.id}
+      {project?.projectLayout?.bid_draft?.["1_project_overview"]?.project_name}
     
     <div className="min-h-screen bg-background py-8">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-8 text-center">Bid Draft: Bridge and River link over Ganga</h1>
+          <h1 className="text-4xl font-bold mb-8 text-center">Bid Draft: { project?.name}</h1>
           <BidDraftUI project={ project} />
       </div>
       </div>

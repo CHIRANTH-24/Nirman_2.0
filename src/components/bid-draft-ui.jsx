@@ -16,25 +16,18 @@ import { ComplianceAndCertifications } from "./compilance-and-certifications"
 import { useParams } from "next/navigation"
 
 export function BidDraftUI({project}) {
-    const [costData, setCostData] = useState([]);
-    console.log(project?.projectLayout?.bid_draft?.['2_cost_breakdown'])
-
-    useEffect(() => {
-        const costBreakdown = project?.projectLayout?.bid_draft?.['2_cost_breakdown'];
-
-        if (costBreakdown) {
-            // Transform the cost breakdown object into the required format
-            const formattedCostData = Object.entries(costBreakdown).map(([key, value]) => ({
-                name: formatKey(key), // Format the key to make it more readable
-                value: parseCurrency(value), // Parse the value into a number
-            }));
-
-            setCostData(formattedCostData);
-        }
-    }, [project]);
+    
+    
+    const [costData, setCostData] = useState([
+        { name: "Materials", value: 200 },
+        { name: "Labor Costs", value: 100 },
+        { name: "Equipment and Machinery", value: 50 },
+        { name: "Miscellaneous Costs", value: 20 },
+        { name: "Profit Margin", value: 130 },
+    ])
 
     const [timelineData, setTimelineData] = useState([
-        { phase: "Phase1", duration: "3 months", startDate: "2023-06-01", endDate: "2023-08-31" },
+        { phase: "Phase 1", duration: "3 months", startDate: "2023-06-01", endDate: "2023-08-31" },
         { phase: "Phase 2", duration: "4 months", startDate: "2023-09-01", endDate: "2023-12-31" },
         { phase: "Phase 3", duration: "6 months", startDate: "2024-01-01", endDate: "2024-06-30" },
         { phase: "Phase 4", duration: "3 months", startDate: "2024-07-01", endDate: "2024-09-30" },
