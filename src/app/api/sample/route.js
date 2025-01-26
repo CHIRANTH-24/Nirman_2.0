@@ -10,6 +10,7 @@ export async function GET(req) {
  
   const course = await db
     .select()
-    .from(PROJECT_TABLE);
+    .from(PROJECT_TABLE)
+    .orderBy(PROJECT_TABLE.id, "desc");
   return NextResponse.json({ result: course });
 }
