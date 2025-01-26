@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ProjectOverview } from "./project-overview"
 import { CostBreakdown } from "./cost-breakdown"
@@ -13,15 +13,25 @@ import { ProfitabilityAnalysis } from "./profitability-analysis"
 import { QualityControlAndSafety } from "./quality-control-and-safety"
 import { GeneralInformation } from "./general-information"
 import { ComplianceAndCertifications } from "./compilance-and-certifications"
+import { useParams } from "next/navigation"
 
-export function BidDraftUI() {
-    const [costData, setCostData] = useState([
-        { name: "Materials", value: 200 },
-        { name: "Labor Costs", value: 100 },
-        { name: "Equipment and Machinery", value: 50 },
-        { name: "Miscellaneous Costs", value: 20 },
-        { name: "Profit Margin", value: 130 },
-    ])
+export function BidDraftUI({project}) {
+    const [costData, setCostData] = useState([]);
+    console.log(project?.projectLayout?.bid_draft?.['2_cost_breakdown'])
+
+    useEffect(() => {
+        const costBreakdown = project?.projectLayout?.bid_draft?.['2_cost_breakdown'];
+
+        if (costBreakdown) {
+            // Transform the cost breakdown object into the required format
+            const formattedCostData = Object.entries(costBreakdown).map(([key, value]) => ({
+                name: formatKey(key), // Format the key to make it more readable
+                value: parseCurrency(value), // Parse the value into a number
+            }));
+
+            setCostData(formattedCostData);
+        }
+    }, [project]);
 
     const [timelineData, setTimelineData] = useState([
         { phase: "Phase 1", duration: "3 months", startDate: "2023-06-01", endDate: "2023-08-31" },
@@ -46,8 +56,8 @@ export function BidDraftUI() {
                 <TabsTrigger value="analysis">Analysis</TabsTrigger>
             </TabsList>
             <TabsContent value="overview" className="space-y-8">
-                <ProjectOverview />
-                <GeneralInformation />
+                <ProjectOverview project={project}/>
+                <GeneralInformation project={project} />
             </TabsContent>
             <TabsContent value="costs" className="space-y-8">
                 <CostBreakdown data={costData} setData={setCostData} />

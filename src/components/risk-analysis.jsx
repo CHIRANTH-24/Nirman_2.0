@@ -1,15 +1,24 @@
-"use client"
-
-import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
+const riskAssessmentData = [
+    { risk: "Weather Delays", severity: "Medium", probability: "Medium" },
+    { risk: "Material Price Increase", severity: "Medium", probability: "Medium" },
+    { risk: "Subcontractor Delays", severity: "Medium", probability: "Low" },
+    { risk: "Unexpected Ground Conditions", severity: "High", probability: "Low" },
+]
 
+const riskMitigationData = [
+    { risk: "Weather Delays", mitigation: "Schedule Buffer, Use of Weather Forecasting Tools" },
+    { risk: "Material Price Increase", mitigation: "Fixed Price Contracts with Suppliers, Price Hedging" },
+    {
+        risk: "Subcontractor Delays",
+        mitigation: "Selection of Reliable Subcontractors, Contingency Subcontractor Agreements",
+    },
+    { risk: "Unexpected Ground Conditions", mitigation: "Detailed Site Investigation, Geotechnical Expertise" },
+]
 
 function getSeverityColor(severity) {
     switch (severity.toLowerCase()) {
@@ -24,22 +33,7 @@ function getSeverityColor(severity) {
     }
 }
 
-export function RiskAnalysis({ data, setData }) {
-    const [newRisk, setNewRisk] = useState ({ risk: "", severity: "", probability: "" })
-
-    const handleAddRisk = () => {
-        if (newRisk.risk && newRisk.severity && newRisk.probability) {
-            setData([...data, newRisk])
-            setNewRisk({ risk: "", severity: "", probability: "" })
-        }
-    }
-
-    const handleUpdateRisk = (index, field, value) => {
-        const updatedData = [...data]
-        updatedData[index][field] = value
-        setData(updatedData)
-    }
-
+export function RiskAnalysis() {
     return (
         <Card>
             <CardHeader>
@@ -59,78 +53,52 @@ export function RiskAnalysis({ data, setData }) {
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {data.map((risk, index) => (
-                                        <TableRow key={index}>
+                                    {riskAssessmentData.map((risk) => (
+                                        <TableRow key={risk.risk}>
+                                            <TableCell className="font-medium">{risk.risk}</TableCell>
                                             <TableCell>
-                                                <Input value={risk.risk} onChange={(e) => handleUpdateRisk(index, "risk", e.target.value)} />
+                                                <Badge className={getSeverityColor(risk.severity)}>{risk.severity}</Badge>
                                             </TableCell>
-                                            <TableCell>
-                                                <Select
-                                                    value={risk.severity}
-                                                    onValueChange={(value) => handleUpdateRisk(index, "severity", value)}
-                                                >
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select severity" />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        <SelectItem value="Low">Low</SelectItem>
-                                                        <SelectItem value="Medium">Medium</SelectItem>
-                                                        <SelectItem value="High">High</SelectItem>
-                                                    </SelectContent>
-                                                </Select>
-                                            </TableCell>
-                                            <TableCell>
-                                                <Select
-                                                    value={risk.probability}
-                                                    onValueChange={(value) => handleUpdateRisk(index, "probability", value)}
-                                                >
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select probability" />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        <SelectItem value="Low">Low</SelectItem>
-                                                        <SelectItem value="Medium">Medium</SelectItem>
-                                                        <SelectItem value="High">High</SelectItem>
-                                                    </SelectContent>
-                                                </Select>
-                                            </TableCell>
+                                            <TableCell>{risk.probability}</TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
                             </Table>
-                            <div className="mt-4 grid grid-cols-3 gap-2">
-                                <Input
-                                    placeholder="Risk"
-                                    value={newRisk.risk}
-                                    onChange={(e) => setNewRisk({ ...newRisk, risk: e.target.value })}
-                                />
-                                <Select value={newRisk.severity} onValueChange={(value) => setNewRisk({ ...newRisk, severity: value })}>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select severity" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="Low">Low</SelectItem>
-                                        <SelectItem value="Medium">Medium</SelectItem>
-                                        <SelectItem value="High">High</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <Select
-                                    value={newRisk.probability}
-                                    onValueChange={(value) => setNewRisk({ ...newRisk, probability: value })}
-                                >
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select probability" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="Low">Low</SelectItem>
-                                        <SelectItem value="Medium">Medium</SelectItem>
-                                        <SelectItem value="High">High</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                            <Button className="mt-2" onClick={handleAddRisk}>
-                                Add Risk
-                            </Button>
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="risk-mitigation">
+                        <AccordionTrigger>Risk Mitigation Plans</AccordionTrigger>
+                        <AccordionContent>
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Risk</TableHead>
+                                        <TableHead>Mitigation</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {riskMitigationData.map((risk) => (
+                                        <TableRow key={risk.risk}>
+                                            <TableCell className="font-medium">{risk.risk}</TableCell>
+                                            <TableCell>{risk.mitigation}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="contingency-plans">
+                        <AccordionTrigger>Contingency Plans</AccordionTrigger>
+                        <AccordionContent>
+                            <ul className="list-disc pl-5 space-y-2">
+                                <li>
+                                    <span className="font-semibold">Budget Contingency:</span> 10% set aside for unforeseen expenses
+                                </li>
+                                <li>
+                                    <span className="font-semibold">Schedule Contingency:</span> A two week buffer is included in the
+                                    timeline
+                                </li>
+                            </ul>
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>

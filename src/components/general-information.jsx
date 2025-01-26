@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { DollarSign, CreditCard, Shield } from "lucide-react"
 
-export function GeneralInformation() {
+export function GeneralInformation(project) {
+    console.log({project})
     return (
         <Card>
             <CardHeader>
@@ -12,7 +13,7 @@ export function GeneralInformation() {
                     <DollarSign className="h-8 w-8 text-green-500" />
                     <div>
                         <p className="text-sm text-muted-foreground">Total Bid Price</p>
-                        <p className="text-2xl font-bold">500</p>
+                        <p className="text-2xl font-bold">{project?.project?.projectLayout?.bid_draft?.['13_general_information']?.total_bid_price}</p>
                     </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -20,8 +21,7 @@ export function GeneralInformation() {
                     <div>
                         <h3 className="text-lg font-semibold">Payment Terms</h3>
                         <p className="text-muted-foreground">
-                            30% upfront payment, 30% upon completion of foundation, 30% upon completion of structure, and 10% upon
-                            final inspection.
+                            {project?.project?.projectLayout?.bid_draft?.['13_general_information']?.payment_terms}
                         </p>
                     </div>
                 </div>
@@ -29,7 +29,7 @@ export function GeneralInformation() {
                     <Shield className="h-8 w-8 text-yellow-500 mt-1" />
                     <div>
                         <h3 className="text-lg font-semibold">Warranty Information</h3>
-                        <p className="text-muted-foreground">One year warranty on workmanship and materials.</p>
+                        <p className="text-muted-foreground">{project?.project?.projectLayout?.bid_draft?.['13_general_information']?.warranty_information}</p>
                     </div>
                 </div>
             </CardContent>
