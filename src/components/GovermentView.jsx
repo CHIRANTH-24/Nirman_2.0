@@ -15,7 +15,6 @@ import { Loader2 } from "lucide-react";
 
 
 const GovermentView = () => {
-  const { user } = useUser();
   const [formData, setFormData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const projectId = uuidv4();
