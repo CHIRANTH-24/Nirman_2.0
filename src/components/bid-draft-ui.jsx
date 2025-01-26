@@ -34,7 +34,7 @@ export function BidDraftUI({project}) {
     }, [project]);
 
     const [timelineData, setTimelineData] = useState([
-        { phase: "Phase 1", duration: "3 months", startDate: "2023-06-01", endDate: "2023-08-31" },
+        { phase: "Phase1", duration: "3 months", startDate: "2023-06-01", endDate: "2023-08-31" },
         { phase: "Phase 2", duration: "4 months", startDate: "2023-09-01", endDate: "2023-12-31" },
         { phase: "Phase 3", duration: "6 months", startDate: "2024-01-01", endDate: "2024-06-30" },
         { phase: "Phase 4", duration: "3 months", startDate: "2024-07-01", endDate: "2024-09-30" },
