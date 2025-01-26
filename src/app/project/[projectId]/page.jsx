@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Clock, Users, ChefHat, Utensils } from 'lucide-react'
+import { BidDraftUI } from '@/components/bid-draft-ui';
 
 function RecipePage() {
   const { projectId } = useParams();
@@ -33,7 +34,14 @@ function RecipePage() {
 
   return (
     <div className='min-h-screen bg-gray-100'>
-      { project}
+      { project?.id}
+    
+    <div className="min-h-screen bg-background py-8">
+      <div className="container mx-auto px-4">
+        <h1 className="text-4xl font-bold mb-8 text-center">Bid Draft: Bridge and River link over Ganga</h1>
+        <BidDraftUI />
+      </div>
+      </div>
     </div>
   )
 }

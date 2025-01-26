@@ -74,7 +74,7 @@ function ProjectCard({project}) {
                 alignItems: 'center'
             }}>
                 <span style={{ color: '#666', fontSize: '14px' }}>Project Ref: #{project?.id }</span>
-                <Link href={'dashboard/project' + project?.projectId}>
+                <Link href={'project/'+ project?.projectId}>
                 <Button>
                     View Details
                     </Button>

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { PROJECT_TABLE } from "../../../../configs/schema";
 import { eq } from "drizzle-orm";
+import db from "../../../../configs/DB";
 
 export async function POST(req) {
   const result = await db
