@@ -19,19 +19,19 @@ export function BidDraftUI({project}) {
     const [costData, setCostData] = useState([]);
     console.log(project?.projectLayout?.bid_draft?.['2_cost_breakdown'])
 
-    useEffect(() => {
-        const costBreakdown = project?.projectLayout?.bid_draft?.['2_cost_breakdown'];
+    // useEffect(() => {
+    //     const costBreakdown = project?.projectLayout?.bid_draft?.['2_cost_breakdown'];
 
-        if (costBreakdown) {
-            // Transform the cost breakdown object into the required format
-            const formattedCostData = Object.entries(costBreakdown).map(([key, value]) => ({
-                name: formatKey(key), // Format the key to make it more readable
-                value: parseCurrency(value), // Parse the value into a number
-            }));
+    //     if (costBreakdown) {
+    //         // Transform the cost breakdown object into the required format
+    //         const formattedCostData = Object.entries(costBreakdown).map(([key, value]) => ({
+    //             name: formatKey(key), // Format the key to make it more readable
+    //             value: parseCurrency(value), // Parse the value into a number
+    //         }));
 
-            setCostData(formattedCostData);
-        }
-    }, [project]);
+    //         setCostData(formattedCostData);
+    //     }
+    // }, [project]);
 
     const [timelineData, setTimelineData] = useState([
         { phase: "Phase1", duration: "3 months", startDate: "2023-06-01", endDate: "2023-08-31" },
