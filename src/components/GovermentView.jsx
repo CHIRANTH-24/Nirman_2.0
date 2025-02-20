@@ -14,6 +14,7 @@ import { Slider } from "@/components/ui/slider";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 
 const GovermentView = () => {
+  
   const [inputs, setInputs] = useState({
     materials: 0,
     labor: 0,
@@ -27,8 +28,7 @@ const GovermentView = () => {
     bidPrice: 0,
     costBreakdown: [],
   });
-
-  const [formData, setFormData] = useState({
+   const [formData, setFormData] = useState({
     name: "",
     details: "",
     deadline: "",
@@ -36,8 +36,11 @@ const GovermentView = () => {
     budgetAmount: "",
     minBid: "",
   });
-
   const [isLoading, setIsLoading] = useState(false);
+  const projectId = uuidv4();
+
+ 
+
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 
   const fetchCalculations = async () => {

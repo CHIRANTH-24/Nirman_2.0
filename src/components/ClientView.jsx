@@ -1,4 +1,5 @@
 import React from 'react'
+import ProjectList from './ProjectList'
 
 const ClientView = () => {
   return (
@@ -8,7 +9,8 @@ const ClientView = () => {
               <p className="text-sm text-gray-600 dark:text-gray-300">
                 Welcome to the client view. Here you can manage your projects and track progress.
               </p>
-            </div>
+      </div>
+      <ProjectList />
     </div>
   )
 }
